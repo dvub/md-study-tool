@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+Console.Title = "MDStudy";
 
 String target = "";
 String fileName = "";
 String text = "";
 String[] words = {};
 String jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "config.json");
+
 if (File.Exists(jsonPath)) {
     Console.WriteLine("Found config.json file. Reading...");
     
