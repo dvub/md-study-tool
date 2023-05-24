@@ -65,10 +65,6 @@ Console.WriteLine("Press 'enter' to begin.");
 Console.ReadLine();
 Console.Clear();
 
-
-
-
-
 String input = "";
 int c = 0;
 while (!input.Equals("exit"))
@@ -96,8 +92,9 @@ while (!input.Equals("exit"))
     if (input.Equals("r") || input.Equals("random")) {
         Random r = new Random();
         c = r.Next(0, terms.Count);
-
+    
     }
+    
     // clear the console just so things are easier to read
     Console.Clear();
     
