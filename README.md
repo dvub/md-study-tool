@@ -1,4 +1,4 @@
-# StudyTool
+# md-study-tool
 
 This is a MD parser -- a study tool, to be more specific, which is designed to take in a target term and find terms to quiz the user on. 
 
