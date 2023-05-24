@@ -1,24 +1,33 @@
-﻿Console.WriteLine("Please enter a file path to read:");
-String fileName = Console.ReadLine()!;
-//String fileName = "";
+﻿using Newtonsoft.Json;
 
+String target = "";
+String fileName = "";
 String text = "";
+String[] words = {};
+if (File.Exists("config.json")) {
+    Console.WriteLine("Found config.json file. Reading...");
+    using (StreamReader r = new StreamReader("config.json"))
+    {   
+        string json = r.ReadToEnd();
+        Dictionary<String, String> items = JsonConvert.DeserializeObject<Dictionary<String, String>>(json)!;
+        fileName = items["file"];
+        target = items["target"];
+    }   
 
-try
-{
-  text = File.ReadAllText(fileName);
-} catch (Exception e)
-{
-    Console.WriteLine(e);
+} else {
+    Console.WriteLine("Did not find a config.json file.");
+    Console.WriteLine("Please enter a file path to read:");
+    fileName = Console.ReadLine()!;
+    //String fileName = "";
+
+    Console.WriteLine("Please enter a target to search for:");
+    target = Console.ReadLine()!;
+
 }
 
+text = File.ReadAllText(fileName);
 Console.WriteLine("Successfully read file: " + fileName);
-
-Console.WriteLine("Please enter a target to search for:");
-String target = Console.ReadLine()!;
-
-String[] words = text.Split(' ');
-
+words = text.Split(' ');   
 
 Dictionary<String, String> terms = new Dictionary<String, String>();
 
@@ -50,29 +59,44 @@ for (int i = 0; i < words.Length; i++)
 }
 Console.WriteLine("Dictionary Populated... Found " + terms.Count + " terms.");
 Console.WriteLine("");
-Console.WriteLine("Press 'enter' if can define the words. If not, type 'n' to see the definition.");
+Console.WriteLine("Press 'enter' to begin.");
+Console.ReadLine();
+Console.Clear();
 
 
 
-int count = 0;
-foreach (String word in terms.Keys)
+
+
+String input = "";
+int c = 0;
+while (!input.Equals("exit"))
 {
-    count++;
-    Console.Write(count + ". Define ");
+    KeyValuePair<String, String> kv = terms.ElementAt(c);
+    int len = ("Define?" + kv.Key).Length;
+    Console.Write(new string(' ', (Console.WindowWidth - len) / 2));
+    Console.Write("Define");
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(word + "?");
+    Console.WriteLine(kv.Key + "?");
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("");
 
-    String a = Console.ReadLine()!.ToLower();
+    Console.ReadLine(); // wait for user before displaying definition
+    Console.WriteLine(kv.Value);
+    input = Console.ReadLine()!.ToLower(); // get next action, i.e. exit, next, last, enter
 
-    if (a.Equals("exit"))
-    {
-        break;
-     
+    // change our counter depending on what the user inputs
+    if (input.Equals("") || input.Equals("next") || input.Equals("n")) {
+        c++;
     }
-    Console.WriteLine(word + " - " + terms[word]);
-    Console.ReadLine();
+    if ((input.Equals("last") || input.Equals("l")) && c > 0) {
+        c--;
+    }
+    if (input.Equals("r") || input.Equals("random")) {
+        Random r = new Random();
+        c = r.Next(0, terms.Count);
+
+    }
+    // clear the console just so things are easier to read
     Console.Clear();
     
 }
