@@ -4,9 +4,11 @@ String target = "";
 String fileName = "";
 String text = "";
 String[] words = {};
-if (File.Exists("config.json")) {
+String jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "config.json");
+if (File.Exists(jsonPath)) {
     Console.WriteLine("Found config.json file. Reading...");
-    using (StreamReader r = new StreamReader("config.json"))
+    
+    using (StreamReader r = new StreamReader(jsonPath))
     {   
         string json = r.ReadToEnd();
         Dictionary<String, String> items = JsonConvert.DeserializeObject<Dictionary<String, String>>(json)!;
