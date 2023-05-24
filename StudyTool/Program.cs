@@ -1,6 +1,6 @@
 ﻿Console.WriteLine("Please enter a file path to read:");
-//String fileName = Console.ReadLine()!;
-String fileName = "D:\\obsidian\\obsidian-school\\US History\\Unit Notes\\Unit 7.md";
+String fileName = Console.ReadLine()!;
+//String fileName = "";
 
 String text = "";
 
@@ -65,15 +65,15 @@ foreach (String word in terms.Keys)
     Console.WriteLine("");
 
     String a = Console.ReadLine()!.ToLower();
-    if (a.Equals("n"))
-    {
-        Console.WriteLine( word + " - " + terms[word]);
-        Console.WriteLine("");
-    }
+
     if (a.Equals("exit"))
     {
         break;
      
     }
+    Console.WriteLine(word + " - " + terms[word]);
+    Console.ReadLine();
+    Console.Clear();
+    
 }
 
