@@ -82,6 +82,7 @@ while (!input.Equals("exit"))
 
     Console.ReadLine(); // wait for user before displaying definition
     Console.WriteLine(kv.Value);
+    Console.WriteLine("([r]andom, [n]ext, [l]ast)");
     input = Console.ReadLine()!.ToLower(); // get next action, i.e. exit, next, last, enter
 
     // change our counter depending on what the user inputs
