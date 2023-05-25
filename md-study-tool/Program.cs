@@ -69,10 +69,12 @@ Console.Clear();
 
 String input = "";
 int c = 0;
+int totalStudied = 0;
 while (!input.Equals("exit"))
 {
     KeyValuePair<String, String> kv = terms.ElementAt(c);
     int len = ("Define?" + kv.Key).Length;
+    Console.WriteLine(totalStudied);
     Console.WriteLine();
     Console.Write(new string(' ', (Console.WindowWidth - len) / 2));
     
@@ -84,7 +86,7 @@ while (!input.Equals("exit"))
 
 
     Console.ReadLine(); // wait for user before displaying definition
-
+    Console.Write(new string(' ', (Console.WindowWidth - kv.Value.Length) / 2));
     Console.WriteLine(kv.Value);
     Console.WriteLine();
     Console.WriteLine("([r]andom, [n]ext, [l]ast)");
@@ -105,6 +107,7 @@ while (!input.Equals("exit"))
     
     // clear the console just so things are easier to read
     Console.Clear();
+    totalStudied++;
     
 }
 
