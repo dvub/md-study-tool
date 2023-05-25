@@ -4,6 +4,10 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 
+# ignore config file
+md-study-tool/config.json
+
+
 # User-specific files
 *.rsuser
 *.suo

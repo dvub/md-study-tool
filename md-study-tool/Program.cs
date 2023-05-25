@@ -73,20 +73,25 @@ while (!input.Equals("exit"))
 {
     KeyValuePair<String, String> kv = terms.ElementAt(c);
     int len = ("Define?" + kv.Key).Length;
+    Console.WriteLine();
     Console.Write(new string(' ', (Console.WindowWidth - len) / 2));
+    
     Console.Write("Define");
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(kv.Key + "?");
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("");
 
+
     Console.ReadLine(); // wait for user before displaying definition
+
     Console.WriteLine(kv.Value);
+    Console.WriteLine();
     Console.WriteLine("([r]andom, [n]ext, [l]ast)");
     input = Console.ReadLine()!.ToLower(); // get next action, i.e. exit, next, last, enter
 
     // change our counter depending on what the user inputs
-    if (input.Equals("") || input.Equals("next") || input.Equals("n")) {
+    if (( input.Equals("") || input.Equals("next") || input.Equals("n")) && c < terms.Count) {
         c++;
     }
     if ((input.Equals("last") || input.Equals("l")) && c > 0) {
