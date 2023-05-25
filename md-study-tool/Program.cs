@@ -76,7 +76,7 @@ while (!input.Equals("exit"))
     int len = ("Define?" + kv.Key).Length;
     Console.WriteLine(totalStudied);
     Console.WriteLine();
-    Console.Write(new string(' ', (Console.WindowWidth - len) / 2));
+    Console.Write(new string(' ', (Math.Max(Console.WindowWidth - len, 0)) / 2));
     
     Console.Write("Define");
     Console.ForegroundColor = ConsoleColor.Red;
@@ -86,7 +86,7 @@ while (!input.Equals("exit"))
 
 
     Console.ReadLine(); // wait for user before displaying definition
-    Console.Write(new string(' ', (Console.WindowWidth - kv.Value.Length) / 2));
+    Console.Write(new string(' ', (Math.Max(Console.WindowWidth - kv.Value.Length, 0)) / 2));
     Console.WriteLine(kv.Value);
     Console.WriteLine();
     Console.WriteLine("([r]andom, [n]ext, [l]ast)");
